@@ -16,9 +16,27 @@ const resultSpeed = document.getElementById('resultSpeed');
 const resultCalories = document.getElementById('resultCalories');
 const statusText = document.getElementById('statusText');
 const closeBtn = document.getElementById('closeBtn');
+const trophyBtn = document.getElementById('trophyBtn');
+const historyPanel = document.getElementById('historyPanel');
+const historyOverlay = document.getElementById('historyOverlay');
+const historyClose = document.getElementById('historyClose');
+const historyList = document.getElementById('historyList');
 
 startBtn.addEventListener('click', toggleTracking);
-closeBtn.addEventListener('click', () => results.classList.remove('show'));
+closeBtn.addEventListener('click', () => {
+    results.classList.remove('show');
+    resetDisplay();
+});
+trophyBtn.addEventListener('click', openHistory);
+historyClose.addEventListener('click', closeHistory);
+historyOverlay.addEventListener('click', closeHistory);
+
+function resetDisplay() {
+    timeDisplay.textContent = '0:00';
+    distanceDisplay.textContent = '0.00 км';
+    totalDistance = 0;
+    totalTime = 0;
+}
 
 async function toggleTracking() {
     if (!isTracking) {
@@ -113,6 +131,14 @@ function stopTracking() {
     startBtn.classList.remove('active');
     statusText.textContent = '';
 
+    saveTraining({
+        date: new Date().toISOString(),
+        time: totalTime,
+        distance: distanceKm,
+        speed: speed,
+        calories: Math.round(calories)
+    });
+
     setTimeout(() => results.classList.add('show'), 100);
 }
 
@@ -139,6 +165,86 @@ function getCoefficient(speed) {
     if (speed <= 20) return 0.385;
     if (speed <= 25) return 0.475;
     return 0.575;
+}
+
+function saveTraining(training) {
+    const trainings = JSON.parse(localStorage.getItem('gps_trainings') || '[]');
+    trainings.push(training);
+    localStorage.setItem('gps_trainings', JSON.stringify(trainings));
+}
+
+function getTrainings() {
+    return JSON.parse(localStorage.getItem('gps_trainings') || '[]');
+}
+
+function deleteTraining(index) {
+    const trainings = getTrainings();
+    trainings.splice(index, 1);
+    localStorage.setItem('gps_trainings', JSON.stringify(trainings));
+    renderHistory();
+}
+
+function formatTime(seconds) {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+    if (h > 0) return h + 'ч ' + m + 'м';
+    return m + 'м ' + s + 'с';
+}
+
+function formatDate(iso) {
+    const d = new Date(iso);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    const hours = String(d.getHours()).padStart(2, '0');
+    const mins = String(d.getMinutes()).padStart(2, '0');
+    return day + '.' + month + '.' + year + '  ' + hours + ':' + mins;
+}
+
+function renderHistory() {
+    const trainings = getTrainings();
+    if (trainings.length === 0) {
+        historyList.innerHTML = '<div class="history-empty">Нет тренировок</div>';
+        return;
+    }
+
+    let html = '';
+    for (let i = trainings.length - 1; i >= 0; i--) {
+        const t = trainings[i];
+        html += `
+            <div class="history-item">
+                <button class="history-delete" onclick="deleteTraining(${i})">&times;</button>
+                <div class="history-date">${formatDate(t.date)}</div>
+                <div class="history-stats">
+                    <div class="history-stat">
+                        <div class="history-stat-value">${t.distance.toFixed(2)}</div>
+                        <div class="history-stat-label">км</div>
+                    </div>
+                    <div class="history-stat">
+                        <div class="history-stat-value">${formatTime(t.time)}</div>
+                        <div class="history-stat-label">время</div>
+                    </div>
+                    <div class="history-stat">
+                        <div class="history-stat-value">${t.calories}</div>
+                        <div class="history-stat-label">ккал</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    historyList.innerHTML = html;
+}
+
+function openHistory() {
+    renderHistory();
+    historyPanel.classList.add('show');
+    historyOverlay.classList.add('show');
+}
+
+function closeHistory() {
+    historyPanel.classList.remove('show');
+    historyOverlay.classList.remove('show');
 }
 
 document.addEventListener('visibilitychange', async () => {
