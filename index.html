@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="apple-mobile-web-app-title" content="GPS Tracker">
+    <link rel="manifest" href="manifest.json">
+    <title>GPS Трекер</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #0a0a1a !important;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+
+    <div class="container">
+        <h1 class="title">GPS Трекер</h1>
+
+        <div class="stats">
+            <div class="time" id="time">0:00</div>
+            <div class="distance" id="distance">0.00 км</div>
+        </div>
+
+        <button class="start-btn" id="startBtn">Старт</button>
+        <div class="status" id="statusText"></div>
+
+        <div class="results" id="results">
+            <h2>Результаты</h2>
+            <div class="result-row">
+                <span class="result-label">Дистанция</span>
+                <div>
+                    <span class="result-value" id="resultDistance">0.00</span>
+                    <span class="result-unit">км</span>
+                </div>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Средняя скорость</span>
+                <div>
+                    <span class="result-value" id="resultSpeed">0.0</span>
+                    <span class="result-unit">км/ч</span>
+                </div>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Калории</span>
+                <div>
+                    <span class="result-value" id="resultCalories">0</span>
+                    <span class="result-unit">ккал</span>
+                </div>
+            </div>
+            <button class="close-btn" id="closeBtn">Закрыть</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

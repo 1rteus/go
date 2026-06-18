@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    background: #0a0a1a !important;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a1a !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 50px;
+}
+
+.stats {
+    margin-bottom: 50px;
+}
+
+.time {
+    font-size: 72px;
+    font-weight: 200;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+    color: #a78bfa;
+    font-variant-numeric: tabular-nums;
+}
+
+.distance {
+    font-size: 20px;
+    color: #8b8bbd;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.start-btn {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    background: rgba(139, 92, 246, 0.12);
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.2);
+}
+
+.start-btn:active {
+    transform: scale(0.95);
+}
+
+.start-btn.active {
+    border-color: rgba(239, 68, 68, 0.5);
+    background: rgba(239, 68, 68, 0.15);
+    box-shadow: 0 0 40px rgba(239, 68, 68, 0.2);
+    color: #ffffff;
+}
+
+.status {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 24px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    min-height: 20px;
+}
+
+.results {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: #111028;
+    padding: 36px 32px 48px;
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 -10px 60px rgba(0, 0, 0, 0.8);
+    transition: bottom 0.5s ease;
+    border-top: 1px solid rgba(139, 92, 246, 0.2);
+    z-index: 100;
+}
+
+.results.show {
+    bottom: 0;
+}
+
+.results h2 {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 28px;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.result-row:last-of-type {
+    border-bottom: none;
+}
+
+.result-label {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 300;
+}
+
+.result-value {
+    font-size: 28px;
+    font-weight: 300;
+    color: #a78bfa;
+}
+
+.result-unit {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.35);
+    margin-left: 4px;
+}
+
+.close-btn {
+    margin-top: 28px;
+    width: 100%;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.close-btn:active {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.glow-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow-orb-1 {
+    width: 300px;
+    height: 300px;
+    background: rgba(139, 92, 246, 0.15);
+    top: -80px;
+    right: -60px;
+}
+
+.glow-orb-2 {
+    width: 250px;
+    height: 250px;
+    background: rgba(59, 130, 246, 0.12);
+    bottom: 10%;
+    left: -80px;
+}
+
+.glow-orb-3 {
+    width: 200px;
+    height: 200px;
+    background: rgba(56, 189, 248, 0.1);
+    top: 40%;
+    right: -40px;
+}
