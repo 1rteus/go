@@ -3,6 +3,7 @@
     "short_name": "GPS",
     "description": "Трекер тренировок с GPS",
     "start_url": "/go/",
+    "scope": "/go/",
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#0a0a1a",
