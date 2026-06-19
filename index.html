@@ -7,9 +7,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#0a0a1a">
-    <meta name="apple-mobile-web-app-title" content="GPS Tracker">
+    <meta name="apple-mobile-web-app-title" content="Velo">
     <link rel="manifest" href="manifest.json">
-    <title>GPS Трекер</title>
+    <title>Velo</title>
     <style>
         html, body {
             margin: 0;
@@ -28,15 +28,21 @@
 
     <button class="trophy-btn" id="trophyBtn">&#127942;</button>
 
-    <div class="container">
-        <h1 class="title">GPS Трекер</h1>
+    <div class="mode-bar" id="modeBar">
+        <button class="mode-btn active" id="bikeBtn">&#128690;</button>
+        <button class="mode-btn" id="runBtn">&#127939;</button>
+    </div>
 
+    <div class="container">
         <div class="stats">
             <div class="time" id="time">0:00</div>
             <div class="distance" id="distance">0.00 км</div>
         </div>
 
-        <button class="start-btn" id="startBtn">Старт</button>
+        <div class="btn-row">
+            <button class="start-btn" id="startBtn">Старт</button>
+            <button class="pause-btn" id="pauseBtn">&#9208;</button>
+        </div>
         <div class="status" id="statusText"></div>
 
         <div class="results" id="results">
@@ -75,6 +81,8 @@
     </div>
     <div class="history-overlay" id="historyOverlay"></div>
 
+    <div class="dim-overlay" id="dimOverlay"></div>
+    <div class="dim-hint" id="dimHint">нажмите чтобы включить экран</div>
     <script src="script.js"></script>
 </body>
 </html>
